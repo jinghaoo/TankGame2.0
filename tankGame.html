@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>坦克大战2.0</title>
+    <link rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+
+<!--头部操作提示start-->
+<div class="top">
+    <p>
+        鼠标点击选择玩家<br/>
+        玩家一： W:向上 A:向左 S:向下 D:向右 J:发射子弹<br/>
+        玩家二： ↑：向上 ←：向左 ↓：向后 →：向右 空格：发射子弹
+    </p>
+</div>
+<!--头部操作提示end-->
+
+<!--战场部分start-->
+<div id="main">
+    <div id="left">
+        <div id="gameLevel">第&nbsp;&nbsp;<span>一</span>&nbsp;&nbsp;关</div>
+    </div>
+    <div id="right"></div>
+    <div id="tank90">
+        <a href="#" id="play-one">1&nbsp;PLAYER</a>
+        <a href="#" id="play-two">2&nbsp;PLAYERS</a>
+    </div>
+</div>
+<!--战场部分end-->
+
+<!--声音部分start-->
+<div id="audio">
+
+</div>
+<!--声音部分end-->
+
+<script type="text/javascript" src="JSTools/define.js"></script>
+<script type="text/javascript" src="JSTools/core.js"></script>
+
+<script type="text/javascript" src="JSTools/mapData.js"></script>
+<script type="text/javascript" src="js/Map.class.js"></script>
+<script type="text/javascript" src="js/Music.class.js"></script>
+
+
+<script type="text/javascript" src="js/Object.class.js"></script>
+<script type="text/javascript" src="js/Props.class.js"></script>
+<script type="text/javascript" src="js/Bomb.class.js"></script>
+<script type="text/javascript" src="js/Bullet.class.js"></script>
+<script type="text/javascript" src="js/Tank.class.js"></script>
+<script type="text/javascript" src="js/MyTank.class.js"></script>
+<script type="text/javascript" src="js/Flick.class.js"></script>
+
+
+
+<script type="text/javascript" src="js/Game.class.js"></script>
+
+<script>
+    window.onload = function () {
+
+        var oAudio = $('audio');
+
+        var oParent = $('left');
+        var oRight = $('right');
+        var rank90 = $('tank90');
+        startMoveTime(rank90, {'top': 125}, 2000, 'linear');
+
+        var aHref = rank90.getElementsByTagName('a');
+
+        for (var i = 0; i < aHref.length; i++) {
+            aHref[i].index = i + 1;
+            aHref[i].onclick = function () {
+                rank90.style.display = 'none';
+
+                var oGame = new Game(oParent, oRight,oAudio,this.index);
+                oGame.startGame();
+            }
+        }
+
+    };
+</script>
+</body>
+</html>
